@@ -184,6 +184,7 @@ namespace DapperDemos.CustomQuery
                     //Console.WriteLine(msg, property.Name, mapsto.Name);
                 }
             }
+            
             return retVal;
         }
     }

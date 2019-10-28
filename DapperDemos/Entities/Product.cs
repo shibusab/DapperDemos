@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DapperDemos.CustomQuery;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,22 @@ namespace DapperDemos.Entities
 {
     public class Product
     {
+        [DbColumn("Id")]
         public int Id { get; set; }
+
+        [DbColumn("ProductName")]
         public string ProductName { get; set; }
+
+        [DbColumn("SupplierId")]
         public int SupplierId { get; set; }
+
+        [DbColumn("UnitPrice")]
         public decimal UnitPrice { get; set; }
+
+        [DbColumn("Package")]
         public string Package { get; set; }
+
+        [DbColumn("IsDiscontinued")]
         public bool IsDiscontinued { get; set; }
 
         public override string ToString()

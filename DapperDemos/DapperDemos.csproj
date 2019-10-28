@@ -48,6 +48,7 @@
     <Compile Include="CustomQuery\ColumnPositionAttribute.cs" />
     <Compile Include="CustomQuery\DataReaderExtensions.cs" />
     <Compile Include="CustomQuery\DbColumnAttribute.cs" />
+    <Compile Include="CustomQuery\MyParameter.cs" />
     <Compile Include="CustomQuery\MyQuery.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Product.cs" />

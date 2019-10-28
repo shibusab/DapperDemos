@@ -22,9 +22,26 @@ namespace DapperDemos
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var query = @"SELECT Id as IdTest, FirstName, LastName,City,Country,Phone,CustomerTypeID From Customer WHERE Country = 'USA'";
-                var results = new CustomQuery.MyQuery(connection).Query<Entities.Customer>(query);
-                var results2 = new CustomQuery.MyQuery(connection).QueryOne<Entities.Customer>(query);
+                 /*//SQL Query without parameters
+                 var query = @"SELECT Id as IdTest, FirstName, LastName,City,Country,Phone,CustomerTypeID From Customer WHERE Country = 'USA'";
+                 var results = new CustomQuery.MyQuery(connection).Query<Entities.Customer>(query);
+                 var results2 = new CustomQuery.MyQuery(connection).QueryOne<Entities.Customer>(query);
+                */
+
+                //Stored Procedure without parameter
+                var results3 = new CustomQuery.MyQuery(connection).Query<Entities.Product>("sp_GetAllProducts", null, CustomQuery.QueryType.Procedure);
+                
+                //Stored Procedure with parameter
+                var spParameter = new List<CustomQuery.MyParameter>();
+                spParameter.Add(new CustomQuery.MyParameter ("@country",CustomQuery.DataType.String, "USA" ));
+                var results4 = new CustomQuery.MyQuery(connection).Query<Entities.Product>("sp_GetCustomerByCountry", spParameter, CustomQuery.QueryType.Procedure);
+                
+                //SQL Query with parameters
+                var queryWithParameters = @"SELECT Id as IdTest, FirstName, LastName,City,Country,Phone,CustomerTypeID From Customer WHERE Country = @country";
+                var queryParameter = new List<CustomQuery.MyParameter>();
+                queryParameter.Add(new CustomQuery.MyParameter("@country", CustomQuery.DataType.String, "USA"));
+                var results5 = new CustomQuery.MyQuery(connection).Query<Entities.Customer>(queryWithParameters, queryParameter, CustomQuery.QueryType.Text);
+
 
             }
             Console.WriteLine("Hello World! Enter to Close");
